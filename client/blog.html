@@ -1,0 +1,71 @@
+<template name="blog">
+<!-- <div class="parallax1"></div>
+<div><center><h1 style="color:black;">Welcome to Ariana Braving's Blog</h1></center></div> -->
+
+
+<!-- <div class="parallax2"></div> -->
+<!-- <div class="container-fluid" style="background-image: url('https://static.pexels.com/photos/125457/pexels-photo-125457.jpeg');"> -->
+<!-- <div class="container-fluid showBackgroundImage"> -->
+  <div class="container-fluid ">
+    <br/>
+    <br/>
+    <br/>
+    <div class="row">
+  
+      <ul>
+        {{#if blogReady}}
+          {{#each posts}}
+          
+              <div class="col-md-4 col-xl-3">
+                <div class="thumbnail">
+                  <img src={{featuredImage}} alt="..." class="thumbnail-img">
+                  <div class="caption">
+                  <!-- {{#if english _id}} -->
+                    <h3><a href="/blog/{{slug}}">{{title}}</a></h3>
+                    <p class="excerpt">{{excerpt}}</p>
+                  <!-- {{else}} -->
+                    <!-- <h3><a href="/blog/{{slug}}"><p dir="rtl">{{title}}</p></a></h3> -->
+                    <!-- <p class="excerpt" dir="rtl">{{excerpt}}</p> -->
+                  <!-- {{/if}} -->
+                    <p><a href="/blog/{{slug}}" class="btn btn-primary" role="button">READ MORE</a></p>
+                    <p>
+                    <!-- {{mehdi}} -->
+                    </p>
+                  </div>
+                </div>
+              </div>
+        
+          {{else}}
+            <li>No posts found.</li>
+          {{/each}}
+        {{else}}
+          <li>Loading...</li>
+        {{/if}}
+      </ul>
+    </div> <!-- row -->
+  </div> <!-- container -->
+</template>
+
+
+
+<template name="blog1">
+  <br/>
+  <br/>
+  <br/>
+  <h1>Welcome to my Blog</h1>
+  <ul>
+    {{#if blogReady}}
+      {{#each posts}}
+        <li>
+          <h2>{{title}}</h2>
+          <p>Published on {{publishedAt}}</p>
+          <p>Excerpt: {{excerpt}}</p>
+        </li>
+      {{else}}
+        <li>No posts found.</li>
+      {{/each}}
+    {{else}}
+      <li>Loading...</li>
+    {{/if}}
+  </ul>
+</template>

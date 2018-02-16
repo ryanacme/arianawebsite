@@ -1,0 +1,51 @@
+<head>
+  <link rel="alternate" type="application/rss+xml" title="My blog title" href="/rss/posts">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+</head>
+
+
+<template name="header">
+  
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+   <ul class="nav navbar-nav">
+    <li>
+      <a id="languageSelector" href="#" class="js-language-selector language" data-toggle="tooltip" data-placement="bottom" title="Change to Farsi">فارسی</a>
+  
+    </li>
+   </ul>
+   <div class="container">
+    <div class="navbar-header">
+
+      <a class="navbar-brand" href="/">Ariana Braving</a>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a id="couching" href="/couching">Couching</a>
+        </li>
+        <li>
+          <a id="podcasts" href="/podcasts">Podcasts</a>
+        </li>
+        <li>
+          <a id="blog" href="{{blogPathFor "blogIndex"}}">Blog</a>
+          <!-- <a id="blog" href="/blog/tag/english">Blog</a> -->
+
+        </li>
+        <li>
+          <a href="{{blogPathFor "blogAdmin"}}">Admin Area (must login)</a>
+        </li>
+
+        <li class="nav navbar-nav navbar-right">
+          {{> loginButtons}}
+        </li>
+      </ul>
+      
+    
+    </div>
+    </div>
+</nav>
+
+</template>
+
+
