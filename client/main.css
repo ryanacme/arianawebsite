@@ -1,1 +1,72 @@
 /* CSS declarations go here */
+
+/*----------------Navbar------------------*/
+.navbar-default{
+  background-color:#af0303;
+}
+
+.navbar-default .navbar-nav > li > a:not(.language):hover,
+.navbar-default .navbar-nav > li > a:not(.language):focus,
+/*.navbar-default .navbar-nav > .active > a:not(.language):hover,*/
+/*.navbar-default .navbar-nav > .active > a:not(.language):focus,*/
+.navbar-default .navbar-nav > .open >a {
+
+    text-decoration: none;
+    background-color: white;
+    /*background-color: green;*/
+    color:black;
+}
+.navbar-default .navbar-brand {
+    color:white;
+}
+
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+/*.navbar-default .navbar-nav .language > .active > a:hover,
+.navbar-default .navbar-nav .language > .active > a:focus {*/
+    text-decoration: none;
+    background-color: white;
+    /*background-color: green;*/
+    color:black;
+}
+
+.navbar-default .navbar-nav a.language,
+.navbar-default .navbar-nav a.language:hover,
+.navbar-default .navbar-nav a.language:focus {
+/*.navbar-default .navbar-nav .language > .active > a:hover,
+.navbar-default .navbar-nav .language > .active > a:focus {*/
+    text-decoration: none;
+    color:white;
+    background-color:#af0303;
+}
+
+.navbar-default .navbar-nav > li> a:not(.language) {
+    color:white;
+}
+
+/*----------------Navbar------------------*/
+
+.excerptText{
+  font-size: 20px;
+  max-height: 226px;
+  height: 226px;
+  overflow : hidden;
+    text-overflow: ellipsis;
+    content: "";
+    background: -webkit-linear-gradient(top,#000 70%, #fff);
+   -webkit-background-clip: text;
+   -webkit-text-fill-color: transparent;
+  /*white-space : wrap;*/
+}
+
+.fullText{
+  font-size: 20px;
+  /*max-height: 226px;*/
+  /*height: 226px;*/
+  overflow: visible;
+   /* text-overflow: ellipsis;*/
+   /* content: "";*/
+   /* background: -webkit-linear-gradient(top,#000 70%, #fff);*/
+   /*-webkit-background-clip: text;*/
+   /*-webkit-text-fill-color: transparent;*/
+}
