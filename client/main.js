@@ -25,20 +25,66 @@ Template.home.rendered = function() {
   $("#fullText1").hide();
   $("#fullText2").hide();
   $("#fullText3").hide();
-  $("#scheduleAppForms").hide();
+  $(".js-scheduleAppForms").hide();
+  $(".js-scheduleAppThx").hide();
 };
 
 Template.home.events({
-  "click #scheduleAppBtn":function(event){
+  "click .js-scheduleAppBtn":function(event){
     
-    $("#scheduleAppForms").show(1500);
-    // $("#scheduleAppForms").slideDown();
-    $("#scheduleAppBtn").hide(1000);
+    $(".js-scheduleAppForms").show(1500);
+    // $(".js-scheduleAppForms").slideDown();
+    $(".js-scheduleAppBtn").hide(1000);
   },
   
-  "click #cancelAppBtn":function(event){
-    $("#scheduleAppBtn").show(1500);
-    $("#scheduleAppForms").hide(1000);
+  "click .js-cancelAppBtn":function(event){
+    $(".js-scheduleAppBtn").show(1500);
+    $(".js-scheduleAppForms").hide(1000);
+  },
+  
+  "submit .js-scheduleAppForms":function(event){
+    
+    event.preventDefault();
+    var inputName, inputFamilyName, inputAddress, inputEmail, inputPhone, inputSkype, inputComment, inputHowFind;
+    inputName = event.target.inputNameSchedule.value;
+    inputFamilyName = event.target.inputFamilyName.value;
+    inputEmail = event.target.inputEmailSchedule.value;
+    inputPhone = event.target.inputPhone.value;
+    inputSkype = event.target.inputSkype.value;
+    inputAddress = event.target.inputAddress.value;
+    inputComment = event.target.inputComment.value;
+    inputHowFind = event.target.inputHowFind.value;
+    
+    var htmlContent = ['<head><style>table {width:100%; max-width: 500px;} table, th, td {border: 1px solid black; border-collapse: collapse;} th, td {padding: 5px;  text-align: left;} </style></head>',
+                        '<h4>Hi Ariana. You have a new request for scheduling and appointment as below:</h4>',
+                        '<body><table>',
+                        '<tr><td>First name</td><td>' + inputName + '</td></tr>',
+                        '<tr><td>Family name</td><td>' + inputFamilyName + '</td></tr>',
+                        '<tr><td>Email</td><td>' + inputEmail + '</td></tr>',
+                        '<tr><td>Phone</td><td>' + inputPhone + '</td></tr>',
+                        '<tr><td>Skype</td><td>' + inputSkype + '</td></tr>',
+                        '<tr><td>Address</td><td>' + inputAddress + '</td></tr>',
+                        '<tr><td>Comment</td><td>' + inputComment + '</td></tr>',
+                        '<tr><td>How find us</td><td>' + inputHowFind + '</td></tr>',
+                        '</table></body>'].join('');
+                      
+// Meteor.call('sendEmail',{
+//     to: 'ryan.braving@gmail.com',
+//     from: 'no-reply@where-ever.com',
+//     subject: 'New Appointment Request!',
+//     text: 'Mailgun is totally awesome for sending emails!',
+//     // html: 'With meteor it&apos;s easy to set up <strong>HTML</strong> <span style="color:red">emails</span> too.'
+//     html: htmlContent,
+//     });
+
+  $(".js-scheduleAppForms").hide(1000);
+  // $(".js-areYouCurious").hide()
+  var thankYouText = 'Thank&apos;s <span style="color:red">' + inputName + ' ' + inputFamilyName + '</span>. Someone from Ariana&apos;s team will contact you to arrange an appointment.'
+  var thankYouText = '<br><br><div class="alert alert-info" role="alert">Thank&apos;s <strong>' + inputName + ' ' + inputFamilyName + '</strong>. Someone from Ariana&apos;s team will contact you to arrange an appointment.</div>'
+  var thankYouText = '<br><hr style="height:1px;border:none;color:#333;background-color:#333;" width="50%" />Thank&apos;s <strong>' + inputName + ' ' + inputFamilyName + '</strong>. Someone from Ariana&apos;s team will contact you to arrange an appointment.'
+
+  $(".js-scheduleAppThx").html(thankYouText);
+  $(".js-scheduleAppThx").show(1000);
   },
   
   

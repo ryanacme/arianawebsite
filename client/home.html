@@ -19,34 +19,35 @@
         <div class="container">
           <br>
           <br>
-        <h1>Are you curious about how coaching can help you? Let's talk.</h1>
+        <h1 class="js-areYouCurious">Are you curious about how coaching can help you? Let's talk.</h1>
+        <h3 class="js-scheduleAppThx">Thank's ...</h3>
         <br>
         <br>
         <!-- <h3>Let's Talk by Schedule a Free Initial Consultation With Me Today</h3> -->
         <!-- <button type="button" class="btn btn-primary btn-lg js-show-modal-subscribe" data-toggle="modal" data-whatever="@mdo">Schedule a Free Consultation With Ariana Today</button> -->
         <!--<a class = "btn btn-primary btn-lg" href="/subscribe">Schedule a Free Consultation With Ariana Today</a>-->
-        <button type="button" id="scheduleAppBtn" class="btn btn-primary btn-lg">Schedule a Free Consultation With Ariana Today</button>
+        <button type="button" class="btn btn-primary btn-lg js-scheduleAppBtn">Schedule a Free Consultation With Ariana Today</button>
         <br>
         <br>
-        <form id="scheduleAppForms">
+        <form class="js-scheduleAppForms">
           
           <div class="row">
             <div class="col-lg-4  col-xs-12">
               <div class="form-group">
-                <label for="inputName">First name</label>
-                <input type="text" class="form-control" id="inputName" placeholder="">
+                <label for="inputNameSchedule">First name</label>
+                <input type="text" class="form-control" id="inputNameSchedule" placeholder="" maxlength="30" required>
               </div>
             </div>
             <div class="col-lg-4  col-xs-12">
               <div class="form-group">
                 <label for="inputFamilyName">Family name</label>
-                <input type="text" class="form-control" id="inputFamilyName" placeholder="">
+                <input type="text" class="form-control" id="inputFamilyName" placeholder="" maxlength="30" required>
               </div>
             </div>
             <div class="col-lg-4  col-xs-12">
               <div class="form-group">
                 <label for="inputAddress">Country - City</label>
-                <input type="text" class="form-control" id="inputAddress" aria-describedby="addressHelp" placeholder="">
+                <input type="text" class="form-control" id="inputAddress" aria-describedby="addressHelp" placeholder="" maxlength="40" required>
                 <small id="addressHelp" class="form-text text-muted">Please let us know which country and city are you living, so that we can find your timezone.</small>
               </div>
             </div>
@@ -55,21 +56,21 @@
           <div class="row">
             <div class="col-lg-4  col-xs-12">
               <div class="form-group">
-                <label for="exampleInputEmail1">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
+                <label for="inputEmailSchedule">Email address</label>
+                <input type="email" class="form-control" id="inputEmailSchedule" aria-describedby="emailHelp" placeholder="" maxlength="30" required>
                 <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
               </div>
             </div>
             <div class="col-lg-4  col-xs-12">
               <div class="form-group">
                 <label for="inputPhone">Phone No.</label>
-                <input type="text" class="form-control" id="inputPhone" placeholder="">
+                <input type="tel" class="form-control" id="inputPhone" placeholder="" maxlength="30">
               </div>
             </div>
             <div class="col-lg-4  col-xs-12">
               <div class="form-group">
                 <label for="inputSkype">Skype Id.</label>
-                <input type="text" class="form-control" id="inputSkype" placeholder="">
+                <input type="text" class="form-control" id="inputSkype" placeholder="" maxlength="30">
               </div>
             </div>
           </div>
@@ -77,14 +78,14 @@
             <div class="col-lg-8  col-xs-12">
               <div class="form-group">
                 <label for="inputComment">Comments</label>
-                <textarea class="form-control" id="inputComment" rows="3" aria-describedby="commentHelp" placeholder="Max. 300 characters"></textarea>
+                <textarea class="form-control" id="inputComment" rows="3" aria-describedby="commentHelp" placeholder="Max. 300 characters" maxlength="300" required></textarea>
                 <small id="commentHelp" class="form-text text-muted">Please let Ariana know what are the reasons that you would like to talk with her.</small>
               </div>
             </div>
             <div class="col-lg-4  col-xs-12">
               <div class="form-group">
                 <label for="inputHowFind">How did you find Ariana?</label>
-                <textarea class="form-control" id="inputHowFind" rows="3" placeholder=""></textarea>
+                <textarea class="form-control" id="inputHowFind" rows="3" placeholder="" maxlength="50" required></textarea>
                 <!--<small id="howFindHelp" class="form-text text-muted">Please let us know which country and city you are from, so that we can find your timezone.</small>-->
               </div>
             </div>
@@ -96,8 +97,8 @@
                 <!--<div class="col-sm-offset-2 center-block">-->
                 <div>
                   <button type="submit" class="btn btn-primary">Submit</button>
-                  <!--<button type="button" id="cancelAppBtn" class="btn btn-link col-sm-offset-2">Cancel</button>-->
-                  <button type="button" id="cancelAppBtn" class="btn btn-link btn-sm">Cancel</button>
+                  <!--<button type="button" class="btn btn-link col-sm-offset-2 js-cancelAppBtn">Cancel</button>-->
+                  <button type="button" class="btn btn-link btn-sm js-cancelAppBtn">Cancel</button>
                 </div>
               </div>
             </div>
@@ -214,12 +215,12 @@
       <form class="js-ryan">
         <div class="form-group form-group-lg row">
           <div class="col-xs-4">
-            <label class="sr-only" for="inputName">Name</label>
-            <input type="name" class="form-control" id="inputName" placeholder="Name">
+            <label class="sr-only" for="inputNameFreebies">Name</label>
+            <input type="name" class="form-control" id="inputNameFreebies" placeholder="Name">
           </div>
           <div class="col-xs-6">
-            <label class="sr-only" for="inputEmail">Email</label>
-            <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+            <label class="sr-only" for="inputEmailFreebies">Email</label>
+            <input type="email" class="form-control" id="inputEmailFreebies" placeholder="Email">
           </div>
           <div class="col-xs-2">
             <button type="submit" class="btn btn-primary btn-lg">Submit Please</button>
