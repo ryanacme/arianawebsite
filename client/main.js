@@ -55,7 +55,28 @@ Template.home.events({
     inputComment = event.target.inputComment.value;
     inputHowFind = event.target.inputHowFind.value;
     
-    var htmlContent = ['<head><style>table {width:100%; max-width: 500px;} table, th, td {border: 1px solid black; border-collapse: collapse;} th, td {padding: 5px;  text-align: left;} </style></head>',
+    $.ajax({
+			url: "https://geoip-db.com/jsonp",
+			jsonpCallback: "callback",
+			dataType: "jsonp",
+			error: function() {
+        console.log("An error occurred,when getting the geoip!");
+			},
+			success: function( location ) {
+			// 	$('#country').html(location.country_name);
+			// 	$('#state').html(location.state);
+			// 	$('#city').html(location.city);
+			// 	$('#latitude').html(location.latitude);
+			// 	$('#longitude').html(location.longitude);
+			// 	$('#ip').html(location.IPv4);  
+				// console.log(location);
+			},
+			complete: function( data) {
+			  var locationObj = data.responseJSON;
+			  console.log(locationObj);
+			  var ipLocation = locationObj.country_name + "-" + locationObj.city;
+			  console.log(ipLocation);
+			  var htmlContent = ['<head><style>table {width:100%; max-width: 500px;} table, th, td {border: 1px solid black; border-collapse: collapse;} th, td {padding: 5px;  text-align: left;} </style></head>',
                         '<h4>Hi Ariana. You have a new request for scheduling and appointment as below:</h4>',
                         '<body><table>',
                         '<tr><td>First name</td><td>' + inputName + '</td></tr>',
@@ -63,20 +84,22 @@ Template.home.events({
                         '<tr><td>Email</td><td>' + inputEmail + '</td></tr>',
                         '<tr><td>Phone</td><td>' + inputPhone + '</td></tr>',
                         '<tr><td>Skype</td><td>' + inputSkype + '</td></tr>',
-                        '<tr><td>Address</td><td>' + inputAddress + '</td></tr>',
+                        '<tr><td>Address</td><td>' + ipLocation + '</td></tr>',
                         '<tr><td>Comment</td><td>' + inputComment + '</td></tr>',
                         '<tr><td>How find us</td><td>' + inputHowFind + '</td></tr>',
                         '</table></body>'].join('');
                       
-// Meteor.call('sendEmail',{
-//     to: 'ryan.braving@gmail.com',
-//     from: 'no-reply@where-ever.com',
-//     subject: 'New Appointment Request!',
-//     text: 'Mailgun is totally awesome for sending emails!',
-//     // html: 'With meteor it&apos;s easy to set up <strong>HTML</strong> <span style="color:red">emails</span> too.'
-//     html: htmlContent,
-//     });
-
+        Meteor.call('sendEmail',{
+            to: 'ryan.braving@gmail.com',
+            from: 'no-reply@where-ever.com',
+            subject: 'New Appointment Request!',
+            text: 'Mailgun is totally awesome for sending emails!',
+            // html: 'With meteor it&apos;s easy to set up <strong>HTML</strong> <span style="color:red">emails</span> too.'
+            html: htmlContent,
+            });
+			}
+		});		
+    
   $(".js-scheduleAppForms").hide(1000);
   // $(".js-areYouCurious").hide()
   var thankYouText = 'Thank&apos;s <span style="color:red">' + inputName + ' ' + inputFamilyName + '</span>. Someone from Ariana&apos;s team will contact you to arrange an appointment.'
