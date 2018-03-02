@@ -35,12 +35,12 @@ Template.home.events({
     $(".js-scheduleAppForms").show(1500);
     // $(".js-scheduleAppForms").slideDown();
     $(".js-scheduleAppBtn").hide(1000);
-  },
+  }, //event helper
   
   "click .js-cancelAppBtn":function(event){
     $(".js-scheduleAppBtn").show(1500);
     $(".js-scheduleAppForms").hide(1000);
-  },
+  }, //event helper
   
   "submit .js-scheduleAppForms":function(event){
     
@@ -54,6 +54,7 @@ Template.home.events({
     inputAddress = event.target.inputAddress.value;
     inputComment = event.target.inputComment.value;
     inputHowFind = event.target.inputHowFind.value;
+    var inputObj = {createdOn: new Date(), name:inputName, familyName:inputFamilyName, email:inputEmail, skypeID:inputSkype, usrAddress:inputAddress, comment:inputComment, howFindUs:inputHowFind};
     
     $.ajax({
 			url: "https://geoip-db.com/jsonp",
@@ -73,18 +74,19 @@ Template.home.events({
 			},
 			complete: function( data) {
 			  var locationObj = data.responseJSON;
-			  console.log(locationObj);
+			  inputObj.geoip = locationObj;
 			  var ipLocation = locationObj.country_name + "-" + locationObj.city;
-			  console.log(ipLocation);
 			  var htmlContent = ['<head><style>table {width:100%; max-width: 500px;} table, th, td {border: 1px solid black; border-collapse: collapse;} th, td {padding: 5px;  text-align: left;} </style></head>',
                         '<h4>Hi Ariana. You have a new request for scheduling and appointment as below:</h4>',
                         '<body><table>',
+                        '<tr><td>DateTime</td><td>' + new Date() + '</td></tr>',
                         '<tr><td>First name</td><td>' + inputName + '</td></tr>',
                         '<tr><td>Family name</td><td>' + inputFamilyName + '</td></tr>',
                         '<tr><td>Email</td><td>' + inputEmail + '</td></tr>',
                         '<tr><td>Phone</td><td>' + inputPhone + '</td></tr>',
                         '<tr><td>Skype</td><td>' + inputSkype + '</td></tr>',
-                        '<tr><td>Address</td><td>' + ipLocation + '</td></tr>',
+                        '<tr><td>User Address</td><td>' + inputAddress + '</td></tr>',
+                        '<tr><td>IP Location</td><td>' + ipLocation + '</td></tr>',
                         '<tr><td>Comment</td><td>' + inputComment + '</td></tr>',
                         '<tr><td>How find us</td><td>' + inputHowFind + '</td></tr>',
                         '</table></body>'].join('');
@@ -96,19 +98,24 @@ Template.home.events({
             text: 'Mailgun is totally awesome for sending emails!',
             // html: 'With meteor it&apos;s easy to set up <strong>HTML</strong> <span style="color:red">emails</span> too.'
             html: htmlContent,
-            });
-			}
-		});		
+        }); // meteor call sendEmail
+        
+        Meteor.call('addScheduleAppointment', inputObj);
+            
+			  
+			}, //complete callback
+			
+		});	//jQuery ajax	
     
-  $(".js-scheduleAppForms").hide(1000);
-  // $(".js-areYouCurious").hide()
-  var thankYouText = 'Thank&apos;s <span style="color:red">' + inputName + ' ' + inputFamilyName + '</span>. Someone from Ariana&apos;s team will contact you to arrange an appointment.'
-  var thankYouText = '<br><br><div class="alert alert-info" role="alert">Thank&apos;s <strong>' + inputName + ' ' + inputFamilyName + '</strong>. Someone from Ariana&apos;s team will contact you to arrange an appointment.</div>'
-  var thankYouText = '<br><hr style="height:1px;border:none;color:#333;background-color:#333;" width="50%" />Thank&apos;s <strong>' + inputName + ' ' + inputFamilyName + '</strong>. Someone from Ariana&apos;s team will contact you to arrange an appointment.'
+    $(".js-scheduleAppForms").hide(1000);
+    // $(".js-areYouCurious").hide()
+    var thankYouText = 'Thank&apos;s <span style="color:red">' + inputName + ' ' + inputFamilyName + '</span>. Someone from Ariana&apos;s team will contact you to arrange an appointment.'
+    var thankYouText = '<br><br><div class="alert alert-info" role="alert">Thank&apos;s <strong>' + inputName + ' ' + inputFamilyName + '</strong>. Someone from Ariana&apos;s team will contact you to arrange an appointment.</div>'
+    var thankYouText = '<br><hr style="height:1px;border:none;color:#333;background-color:#333;" width="50%" />Thank&apos;s <strong>' + inputName + ' ' + inputFamilyName + '</strong>. Someone from Ariana&apos;s team will contact you to arrange an appointment.'
 
-  $(".js-scheduleAppThx").html(thankYouText);
-  $(".js-scheduleAppThx").show(1000);
-  },
+    $(".js-scheduleAppThx").html(thankYouText);
+    $(".js-scheduleAppThx").show(1000);
+  }, //event helper
   
   
   
@@ -129,7 +136,7 @@ Template.home.events({
       $("#toggle1").text("Read More");
       $("#fullText1").slideUp(2000);
     }
-  },
+  }, //event helper
   
   "click #toggle2":function(event){
     var elem = $("#toggle2").text();
@@ -148,7 +155,7 @@ Template.home.events({
       $("#toggle2").text("Read More");
       $("#fullText2").slideUp(2000);
     }
-  },
+  }, //event helper
   
   "click #toggle3":function(event){
     var elem = $("#toggle3").text();
@@ -167,5 +174,25 @@ Template.home.events({
       $("#toggle3").text("Read More");
       $("#fullText3").slideUp(2000);
     }
-  },
-});
+  }, //event helper
+  
+  "submit .js-freebiesForm":function(event){
+    event.preventDefault();
+    var inputNameFreebies, inputEmailFreebies;
+    inputNameFreebies = event.target.inputNameFreebies.value;
+    inputEmailFreebies = event.target.inputEmailFreebies.value;
+    Meteor.call('addFreebies', inputNameFreebies, inputEmailFreebies);
+    
+  }, //event helper
+}); //Template.home.events
+
+
+// this function is to create delay e.g sleep(1000)
+function sleep(milliseconds) {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+    if ((new Date().getTime() - start) > milliseconds){
+      break;
+    }
+  }
+}
