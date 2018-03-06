@@ -8,6 +8,7 @@ Meteor.startup(() => {
     });
 });
 
+// ******************** METHODS ****************************
 Meteor.methods({
     sendEmail: function (mailFields) {
         console.log("about to send email...");
@@ -33,28 +34,29 @@ Meteor.methods({
     }, //addScheduleAppointment
     
     addFreebies: function(inputNameFreebies,inputEmailFreebies){
+            console.log("addFreebies gets called");
             Freebies.insert({createdOn:new Date(), name:inputNameFreebies, email:inputEmailFreebies});
     }, //addFreebies
   });
-  
-  
-// Get list of all method names
-// const lists_METHODS = {
-//   sendEmail,
-//   addScheduleAppointment,
-//   addFreebies,
+
+// ******************** adding RateLimiter *********************
+// const addFreebiesRule = {
+//   type: 'method',
+//   name: 'addFreebies',
 // };
-// const lists_METHODS = ["sendEmail", "addScheduleAppointment", "addFreebies" ];
-// console.log(lists_METHODS);
+// DDPRateLimiter.addRule(addFreebiesRule, 1, 20000);
 
 
-// if (Meteor.isServer) {
-//   DDPRateLimiter.addRule({
-//     name(name) {
-//       return _.contains(LISTS_METHODS, name);
-//     },
+// const sendEmailRule = {
+//   type: 'method',
+//   name: 'sendEmail',
+// };
+// DDPRateLimiter.addRule(sendEmailRule, 1, 20000);
 
-//     // Rate limit per connection ID
-//     connectionId() { return true; }
-//   }, 5, 1000);
-// }
+
+// const addScheduleAppointmentRule = {
+//   type: 'method',
+//   name: 'addScheduleAppointment',
+// };
+// DDPRateLimiter.addRule(addScheduleAppointmentRule, 1, 20000);
+
