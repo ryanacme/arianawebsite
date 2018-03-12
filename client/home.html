@@ -1,5 +1,12 @@
 
 <template name="home">
+  {{#if pageIsEnglish}}
+		{{> homeEN}}
+	{{else}}
+	  {{> homeFR}}
+  {{/if}}
+</template>
+<template name="homeEN">
 
   <!-- <div class="img_text_bundle"> -->
 	 <img class="rose" alt="rose" src="/rose2.jpg" width="100%">
@@ -239,8 +246,7 @@
       <br>
     </div>
   </div>
-
-
+  
 
 
 

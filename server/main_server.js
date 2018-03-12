@@ -39,24 +39,27 @@ Meteor.methods({
     }, //addFreebies
   });
 
-// ******************** adding RateLimiter *********************
-// const addFreebiesRule = {
-//   type: 'method',
-//   name: 'addFreebies',
-// };
-// DDPRateLimiter.addRule(addFreebiesRule, 1, 20000);
+//******************** adding RateLimiter *********************
+const addFreebiesRule = {
+  type: 'method',
+  name: 'addFreebies',
+  connectionId: function() {return true;},
+};
+DDPRateLimiter.addRule(addFreebiesRule, 1, 20000);
 
 
-// const sendEmailRule = {
-//   type: 'method',
-//   name: 'sendEmail',
-// };
-// DDPRateLimiter.addRule(sendEmailRule, 1, 20000);
+const sendEmailRule = {
+  type: 'method',
+  name: 'sendEmail',
+  connectionId: function() {return true;},
+};
+DDPRateLimiter.addRule(sendEmailRule, 1, 20000);
 
 
-// const addScheduleAppointmentRule = {
-//   type: 'method',
-//   name: 'addScheduleAppointment',
-// };
-// DDPRateLimiter.addRule(addScheduleAppointmentRule, 1, 20000);
+const addScheduleAppointmentRule = {
+  type: 'method',
+  name: 'addScheduleAppointment',
+  connectionId:function() {return true;},
+};
+DDPRateLimiter.addRule(addScheduleAppointmentRule, 1, 20000);
 

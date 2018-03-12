@@ -21,7 +21,27 @@
 //   },
 // });
 
-Template.home.rendered = function() {
+
+Template.header.rendered = function() {
+//   var elem = $("#languageSelector").text();
+  Session.set("pageinEnglish",true);
+  // if (elem == "فارسی") {
+  //   $("#languageSelector").attr("href", "/")
+  // } else {
+  //   $("#languageSelector").attr("href", "/fr")
+  // }// else
+    
+};
+
+
+Template.homeFR.rendered = function() {
+  $("#fullText1").hide();
+  $("#fullText2").hide();
+  $("#fullText3").hide();
+  $(".js-scheduleAppForms").hide();
+  $(".js-scheduleAppThx").hide();
+};
+Template.homeEN.rendered = function() {
   $("#fullText1").hide();
   $("#fullText2").hide();
   $("#fullText3").hide();
@@ -185,6 +205,54 @@ Template.home.events({
     
   }, //event helper
 }); //Template.home.events
+
+Template.home.helpers({
+  pageIsEnglish: function(){
+    return Session.get("pageinEnglish");
+  },
+});
+
+
+Template.header.events({
+  "click .js-language-selector":function(event){
+    var elem = $("#languageSelector").text();
+    if (elem == "فارسی") {
+      $("#languageSelector").text("English");
+      $("#coaching").text("کوچینگ");
+      $("#podcasts").text("پادکست");
+      $("#blog").text("وبلاگ");
+      Session.set("pageinEnglish",false);
+    } else {
+      $("#languageSelector").text("فارسی");
+      $("#coaching").text("Coaching");
+      $("#podcasts").text("Podcasts");
+      $("#blog").text("Blog");
+      Session.set("pageinEnglish",true);
+
+    }// else
+    
+    
+  }//event helper
+
+}); //Template.header.events
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // this function is to create delay e.g sleep(1000)
