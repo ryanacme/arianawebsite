@@ -40,6 +40,7 @@ Template.homeFR.rendered = function() {
   $("#fullText3").hide();
   $(".js-scheduleAppForms").hide();
   $(".js-scheduleAppThx").hide();
+  $(".js-freebiesThx").hide();
 };
 Template.homeEN.rendered = function() {
   $("#fullText1").hide();
@@ -47,6 +48,7 @@ Template.homeEN.rendered = function() {
   $("#fullText3").hide();
   $(".js-scheduleAppForms").hide();
   $(".js-scheduleAppThx").hide();
+  $(".js-freebiesThx").hide();
 };
 
 Template.home.events({
@@ -75,7 +77,7 @@ Template.home.events({
     inputComment = event.target.inputComment.value;
     inputHowFind = event.target.inputHowFind.value;
     var inputObj = {createdOn: new Date(), name:inputName, familyName:inputFamilyName, email:inputEmail, skypeID:inputSkype, usrAddress:inputAddress, comment:inputComment, howFindUs:inputHowFind};
-    
+    inputObj.requestedInEnglish = Session.get("pageinEnglish");
     $.ajax({
 			url: "https://geoip-db.com/jsonp",
 			jsonpCallback: "callback",
@@ -84,12 +86,6 @@ Template.home.events({
         console.log("An error occurred,when getting the geoip!");
 			},
 			success: function( location ) {
-			// 	$('#country').html(location.country_name);
-			// 	$('#state').html(location.state);
-			// 	$('#city').html(location.city);
-			// 	$('#latitude').html(location.latitude);
-			// 	$('#longitude').html(location.longitude);
-			// 	$('#ip').html(location.IPv4);  
 				// console.log(location);
 			},
 			complete: function( data) {
@@ -109,6 +105,7 @@ Template.home.events({
                         '<tr><td>IP Location</td><td>' + ipLocation + '</td></tr>',
                         '<tr><td>Comment</td><td>' + inputComment + '</td></tr>',
                         '<tr><td>How find us</td><td>' + inputHowFind + '</td></tr>',
+                        '<tr><td>Requested in English</td><td>' + Session.get("pageinEnglish") + '</td></tr>',
                         '</table></body>'].join('');
                       
         Meteor.call('sendEmail',{
@@ -129,10 +126,11 @@ Template.home.events({
     
     $(".js-scheduleAppForms").hide(1000);
     // $(".js-areYouCurious").hide()
-    var thankYouText = 'Thank&apos;s <span style="color:red">' + inputName + ' ' + inputFamilyName + '</span>. Someone from Ariana&apos;s team will contact you to arrange an appointment.'
-    var thankYouText = '<br><br><div class="alert alert-info" role="alert">Thank&apos;s <strong>' + inputName + ' ' + inputFamilyName + '</strong>. Someone from Ariana&apos;s team will contact you to arrange an appointment.</div>'
-    var thankYouText = '<br><hr style="height:1px;border:none;color:#333;background-color:#333;" width="50%" />Thank&apos;s <strong>' + inputName + ' ' + inputFamilyName + '</strong>. Someone from Ariana&apos;s team will contact you to arrange an appointment.'
-
+    if (Session.get("pageinEnglish")){
+      var thankYouText = '<br><hr style="height:1px;border:none;color:#333;background-color:#333;" width="50%" />Thank&apos;s <strong>' + inputName + ' ' + inputFamilyName + '</strong>. Someone from Ariana&apos;s team will contact you to arrange an appointment.'
+    } else {
+      var thankYouText = '<br><hr style="height:1px;border:none;color:#333;background-color:#333;" width="50%" />تشکر <strong>' + inputName + ' ' + inputFamilyName + '</strong>. بزودی با شما تماس گرفته خواهد شد تا هماهنگیهای لازم برای قرار ملاقات اینترنتی یا تلفنی انجام پذیرد'
+    }
     $(".js-scheduleAppThx").html(thankYouText);
     $(".js-scheduleAppThx").show(1000);
   }, //event helper
@@ -201,9 +199,32 @@ Template.home.events({
     var inputNameFreebies, inputEmailFreebies;
     inputNameFreebies = event.target.inputNameFreebies.value;
     inputEmailFreebies = event.target.inputEmailFreebies.value;
-    Meteor.call('addFreebies', inputNameFreebies, inputEmailFreebies);
+    var inputObj = {createdOn: new Date(), name:inputNameFreebies, email:inputEmailFreebies, requestedInEnglish:Session.get("pageinEnglish")};
+    $.ajax({
+			url: "https://geoip-db.com/jsonp",
+			jsonpCallback: "callback",
+			dataType: "jsonp",
+			error: function() {
+        console.log("An error occurred,when getting the geoip!");
+			},
+			success: function( location ) {
+				var locationObj = location;
+			  inputObj.geoip = locationObj;
+			  Meteor.call('addFreebies', inputObj);
+			},
+    });	//jQuery ajax	
     
+    $(".js-freebiesForm").hide(1000);
+    // $(".js-areYouCurious").hide()
+    if (Session.get("pageinEnglish")){
+      var thankYouText = '<br><hr style="height:1px;border:none;color:#333;background-color:#333;" width="50%" />Thank&apos;s <strong>' + inputNameFreebies + '</strong>.You have been successfully subscribed to the freebies.';
+    } else {
+      var thankYouText = '<br><hr style="height:1px;border:none;color:#333;background-color:#333;" width="50%" />تشکر<strong>' + inputNameFreebies + '</strong>.اشتراک شما با موفقیت انجام شد. از این پس شما از طریق ایمیل از پستهای جدید مطلع خواهید شد و برخی از مطالب ارزشمند دیگر نیز به صورت رایگان برای شما ارسال میگردد ';
+    }
+    $(".js-freebiesThx").html(thankYouText);
+    $(".js-freebiesThx").show(1000);
   }, //event helper
+  
 }); //Template.home.events
 
 Template.home.helpers({
@@ -236,8 +257,17 @@ Template.header.events({
 
 }); //Template.header.events
 
+// ++++++++++++++++++++++++  Helpers  ++++++++++++++++++++++++++++
+Template.blog.helpers({
 
-
+	posts_after_language_filter: function(){
+		return Blog.Post.find({isEnglish : Session.get("pageinEnglish")});
+		// return Blog.Post.find({});
+	},
+	inEnglish: function(){
+    return Session.get("pageinEnglish");
+  },
+});
 
 
 

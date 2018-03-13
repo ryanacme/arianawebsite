@@ -30,12 +30,12 @@ Meteor.methods({
     
     addScheduleAppointment: function(inputObj){
         var id = ScheduleAppointment.insert(inputObj);
-        console.log("1- addScheduleAppointment method got an id: "+id);
+        // console.log("1- addScheduleAppointment method got an id: "+id);
     }, //addScheduleAppointment
     
-    addFreebies: function(inputNameFreebies,inputEmailFreebies){
-            console.log("addFreebies gets called");
-            Freebies.insert({createdOn:new Date(), name:inputNameFreebies, email:inputEmailFreebies});
+    addFreebies: function(inputObj){
+            // Freebies.insert(inputObj);
+            Freebies.upsert({$and: [{email:inputObj.email}, {requestedInEnglish:inputObj.requestedInEnglish}]}, inputObj);
     }, //addFreebies
   });
 

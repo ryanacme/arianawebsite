@@ -11,29 +11,32 @@
     <br/>
     <br/>
     <div class="row">
-  
       <ul>
         {{#if blogReady}}
-          {{#each posts}}
-          
+          {{#each posts_after_language_filter lang}}
+            {{#if inEnglish}}
               <div class="col-md-4 col-xl-3">
                 <div class="thumbnail">
                   <img src={{featuredImage}} alt="..." class="thumbnail-img">
                   <div class="caption">
-                  <!-- {{#if english _id}} -->
                     <h3><a href="/blog/{{slug}}">{{title}}</a></h3>
                     <p class="excerpt">{{excerpt}}</p>
-                  <!-- {{else}} -->
-                    <!-- <h3><a href="/blog/{{slug}}"><p dir="rtl">{{title}}</p></a></h3> -->
-                    <!-- <p class="excerpt" dir="rtl">{{excerpt}}</p> -->
-                  <!-- {{/if}} -->
                     <p><a href="/blog/{{slug}}" class="btn btn-primary" role="button">READ MORE</a></p>
-                    <p>
-                    <!-- {{mehdi}} -->
-                    </p>
                   </div>
-                </div>
+                </div> <!-- thumbnail-->
               </div>
+            {{else}}  <!--just to make it rtl-->
+              <div class="col-md-4 col-xl-3" dir="rtl">
+                <div class="thumbnail">
+                  <img src={{featuredImage}} alt="..." class="thumbnail-img">
+                  <div class="caption">
+                    <h3><a href="/blog/{{slug}}">{{title}}</a></h3>
+                    <p class="excerpt">{{excerpt}}</p>
+                    <p><a href="/blog/{{slug}}" class="btn btn-primary" role="button">READ MORE</a></p>
+                  </div>
+                </div> <!-- thumbnail-->
+              </div>
+            {{/if}}
         
           {{else}}
             <li>No posts found.</li>

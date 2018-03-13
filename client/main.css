@@ -72,3 +72,31 @@
 }
 
 /*.fr { font-family: "B-Nazanin"; }*/
+
+/*++++++++++++++++++++++++  Blog Post Blocks  ++++++++++++++++++++++++++++*/
+.thumbnail{
+  height: 570px;
+  max-height:570px;
+  /*border-color: #B0C4DE;*/
+  border-style: solid;
+  border-width: 2px;
+}
+.thumbnail:hover{
+
+  border-color: #0000FF;
+  border-style: solid;
+  border-width: 2px;
+}
+.excerpt{
+
+  max-height: 120px;
+  height: 120px;
+  overflow : hidden;
+  white-space : wrap;
+}
+.thumbnail-img{
+  max-height: 300px;
+  /*max-height: 400px;*/
+  height: 300px;
+  /*width: 200px;*/
+}
