@@ -1,5 +1,6 @@
 /* CSS declarations go here */
 
+
 /*----------------Navbar------------------*/
 .navbar-default{
   background-color:#af0303;
@@ -95,8 +96,26 @@
   white-space : wrap;
 }
 .thumbnail-img{
-  max-height: 300px;
+  max-height: 270px;
   /*max-height: 400px;*/
-  height: 300px;
+  height: 270px;
   /*width: 200px;*/
 }
+
+.btn-posts{
+  position: absolute;
+  bottom: 50px;
+}
+
+
+
+/*@font-face {*/
+/*    font-family: 'yekan';*/
+/*    src:url('fonts/yekan.eot?#') format('eot'),    */
+/*          url('fonts/yekan.woff') format('woff'),*/
+/*          url('fonts/yekan.ttf') format('truetype'); */
+/*}*/
+
+/*.MyClass {*/
+/*    font-family: 'yekan';*/
+/*}*/

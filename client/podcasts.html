@@ -1,0 +1,83 @@
+<template name="podcasts2">
+  <div class="container">
+    <br/>
+    <br/>
+    <br/>
+    hiiiiiiiiiiiiiiii
+  <div>
+    {{#if isAdminUser}}
+      {{> sound_add_form_btn}}
+      <!-- {{> sound_add_form}} -->
+    {{/if}}
+  </div>
+  	<div class="row">
+    {{#each sounds}}
+  		<div class="col-sm-6 col-md-4">
+  		<style scoped>
+  			.thumbnail{
+  				width: 335px;
+  				height: 180px;
+  				max-height:180px;
+  				/*border-color: #B0C4DE;*/
+  				border-style: solid;
+  				border-width: 5px;
+			}
+  		</style>
+    		<div class="thumbnail">
+      			<!-- <img src="..." alt="..."> -->
+      			
+      			<div class="caption">
+        			<h3>{{title}}</h3>
+        			 <audio id="myAudio" controls controlsList="nodownload">
+  						    <source src="https://dl.dropboxusercontent.com/s/cbiz1kgu5b9uigv/apple1.mp3?dl=0" type="audio/mpeg">
+                  <source src="https://dl.dropboxusercontent.com/s/cbiz1kgu5b9uigv/apple1.mp3?dl=0" type="audio/ogg">
+						      Your browser does not support the audio element.
+					       </audio>
+        			<p>...</p>
+        			<p><a href="#" class="btn btn-primary btn-xs js-sendtotelegram" role="button">Get on Telegram</a> <a href="#" class="btn btn-default btn-xs" role="button">Bookmark</a></p>
+      			</div>
+    		</div>
+  		</div>
+    {{/each}}
+	</div>
+  		
+  </div>
+</template>
+
+<template name="podcasts3">
+  <br>
+  <br>
+  <br>
+  {{> sound_add_form_btn}}
+  <div class="container">
+
+  <div>
+      This is an example of a static podcasts page. You can put lots of static content
+  </div>
+  <div>
+  	<audio id="myAudio" controls controlsList="nodownload">
+  		<source src="test.m4a" type="audio/mpeg">
+  		<!-- <source src="apple1.ogg" type="audio/ogg"> -->
+		Your browser does not support the audio element.
+	</audio>
+  </div>
+  <div>
+  	<audio controls>
+  		<source src="horse.ogg" type="audio/ogg">
+  		<source src="test.m4a" type="audio/mpeg">
+		Your browser does not support the audio element.
+	</audio>
+  </div>
+    
+  </div> <!-- container -->
+</template>
+
+<template name="podcasts">
+  <br>
+  <br>
+  <br>
+  <div class="container">
+    <audio id="player1" src="test.m4a" type="audio/mp3" controls="controls">
+    </audio>
+  </div>
+</template>

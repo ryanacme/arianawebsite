@@ -63,3 +63,8 @@ const addScheduleAppointmentRule = {
 };
 DDPRateLimiter.addRule(addScheduleAppointmentRule, 1, 20000);
 
+
+//******************** PUBLISH *********************
+Meteor.publish("sounds", function(){
+    return Sounds.find();
+});

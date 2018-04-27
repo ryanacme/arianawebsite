@@ -1,0 +1,17 @@
+<template name="slug">
+<br>
+<br>
+{{#with post}}
+    {{#if inEnglish _id}}
+        <div class="container" style="font-size:large; line-height: 1.7;">
+	        {{> blogShow}}
+	    </div>
+    {{else}}
+        <div class="container" dir="rtl" style="font-size:large; line-height: 1.7;">
+            
+	        {{> blogShow}}
+	        
+	    </div>
+	{{/if}}
+{{/with}}
+</template>

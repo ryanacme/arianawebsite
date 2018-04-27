@@ -3,6 +3,9 @@
 
 // import './main.html';
 
+import 'mediaelement/full';
+
+
 // Template.hello.onCreated(function helloOnCreated() {
 //   // counter starts at 0
 //   this.counter = new ReactiveVar(0);
@@ -21,6 +24,8 @@
 //   },
 // });
 
+Meteor.subscribe("sounds");
+
 
 Template.header.rendered = function() {
 //   var elem = $("#languageSelector").text();
@@ -32,6 +37,7 @@ Template.header.rendered = function() {
   // }// else
     
 };
+
 
 
 Template.homeFR.rendered = function() {
@@ -257,9 +263,8 @@ Template.header.events({
 
 }); //Template.header.events
 
-// ++++++++++++++++++++++++  Helpers  ++++++++++++++++++++++++++++
+// ++++++++++++++++++++++++  Helpers   ++++++++++++++++++++++++++++
 Template.blog.helpers({
-
 	posts_after_language_filter: function(){
 		return Blog.Post.find({isEnglish : Session.get("pageinEnglish")});
 		// return Blog.Post.find({});
@@ -269,14 +274,47 @@ Template.blog.helpers({
   },
 });
 
+Template.slug.helpers({
+	inEnglish: function(id){
+	  return Blog.Post.find({_id:id}).fetch()[0].isEnglish;
+  },
+});
 
 
 
+Template.podcasts.helpers({
+  
+	isAdminUser: function() {
+		// return false;
+		if(Meteor.user() && Meteor.user().roles != undefined){
+			if(Meteor.user().roles[0] == "blogAdmin"){
+				console.log("It is Admin");
+				return true;
+			} //if
+			console.log("It is Not Admin");
+			return false;
+		}// if		
+  }, // isAdminUser helper
+  sounds: function(){
+		return Sounds.find({});
+		// if (Session.get("userFilter")){ //they set a filter
+			// return Images.find({createdBy:Session.get("userFilter")},{sort:{createdOn:-1, rating:-1}});
+		// }//if
+		// else{
+		// 	return Images.find({},{sort:{createdOn:-1, rating:-1}, limit:Session.get("imageLimit")});
+		// }//else
+		
+	
+		
+	}, //helper
+}); //helper
 
 
-
-
-
+Template.sound_add_form_btn.events({
+	"click .js-show-fileinput":function(event){
+    bootbox.dialog({ message: '<div class="text-center"><i class="fa fa-spin fa-spinner"></i> Loading...</div>' });
+  },
+}); // helper
 
 
 
