@@ -3,9 +3,6 @@
 
 // import './main.html';
 
-import 'mediaelement/full';
-
-
 // Template.hello.onCreated(function helloOnCreated() {
 //   // counter starts at 0
 //   this.counter = new ReactiveVar(0);
