@@ -119,3 +119,83 @@
 /*.MyClass {*/
 /*    font-family: 'yekan';*/
 /*}*/
+
+/*-----------------------------------------------*/
+/*-----------------------------------------------*/
+/*-----------------------------------------------*/
+/*PODCAST page*/
+
+/* Container holding the image and the text */
+.podcasts .container_img {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+
+/* Centered text */
+.podcasts .centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.podcasts .bottom-right {
+    position: absolute;
+    bottom: 8px;
+    right: 16px;
+}
+
+.podcasts .thumbnail{
+  height: 310px;
+  max-height:310px;
+  /*border-color: #B0C4DE;*/
+  border-style: solid;
+  border-width: 2px;
+}
+.podcasts .thumbnail:hover{
+
+  border-color: #0000FF;
+  /*border-color: red;*/
+  border-style: solid;
+  border-width: 2px;
+}
+
+.podcasts .image{
+  /*width: 100%;*/
+  /*max-height: 250px;*/
+  height: 250px;
+}
+
+/*.podcasts .title2{*/
+/*  position: absolute;*/
+/*  bottom: 20px;*/
+/*  right: 30px;*/
+/*}*/
+
+.podcasts .title{
+  direction: rtl;
+  margin:7px;
+}
+
+
+.podcasts .btn-podcasts{
+  position: absolute;
+  bottom: 35px;
+}
+
+
+/*.podcasts .title{*/
+  /*position: absolute;*/
+  
+  /*left:320px;*/
+  /*left:160px;*/
+  /*direction: rtl;*/
+  /*text-align:center;*/
+  /*margin-bottom: 3px;*/
+  /*bottom: 150px;*/
+  /*top:50px;*/
+/*}*/
+
+/*-----------------------------------------------*/

@@ -73,11 +73,77 @@
 </template>
 
 <template name="podcasts">
-  <br>
-  <br>
-  <br>
-  <div class="container">
-    <audio id="player1" src="test.m4a" type="audio/mp3" controls="controls">
-    </audio>
+  <div class=container>
+    <br>
+    <br>
+    <br>
+    <div>
+      {{#if isAdminUser}}
+        <button type="button" class="btn btn-primary js-show-fileinput">
+          Insert File
+        </button>
+        <!-- {{> sound_add_form}} -->
+      {{/if}}
+    </div>
+    <br>
+    <br>
+    <br>
+  
+  <div class="podcasts">
+    <div class="row">
+      <div class="col-md-4 col-xl-3">
+        <div class="thumbnail">
+            <img class="image" alt="rose" src="/rose2.jpg">
+          <audio id="player1" controls="controls" width="100%" height="0" src="/test.m4a" type="audio/mp3" preload="none"> </audio>
+          <h2 class="title"> بخشش </h2>
+          <a href="/test.m4a" class="btn btn-primary btn-sm btn-podcasts" role="button" target="_blank" download>دریافت فایل صوتی</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  
+  <!--<a href="/light.jpeg" target="_blank" download>-->
+  <!--<button>Click Me</button>-->
+  <!--</a>-->
+  
+  <!--<div class="container">-->
+  <!--  <audio id="player1" controls="controls" width="420" height="340" poster="light.jpeg">-->
+  <!--    <source src="test.m4a" type="audio/mp3" >-->
+  <!--  </audio>-->
+  <!--</div>-->
+</template>
+
+ <template name="sound_add_form_btn">
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form class="js-add-sound">
+            <div class="form-group">
+              <label for="snd_title" class="form-control-label">Title:</label>
+              <input type="text" class="form-control" id="snd_title"/>
+            </div>  
+            <div class="form-group">
+                <label for="snd_src" class="form-control-label">Sound Link:</label>
+                <input type="text" class="form-control" id="snd_src"/>
+            </div>
+            
+            <button class="btn btn-primary">Save</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>

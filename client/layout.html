@@ -6,12 +6,18 @@
 
 </body>
 
-<template class="layout" name="layout">
-	<div>
-		{{> header}}
-	</div>
+<!--<template class="layout" name="layout">-->
+<!--	<div>-->
+<!--		{{> header}}-->
+<!--	</div>-->
 
-	<div class="marginTop">
-		{{> yield}}
-	</div>
+<!--	<div class="marginTop">-->
+<!--		{{> yield}}-->
+<!--	</div>-->
+<!--</template>-->
+
+<template class="layout" name="layout">
+  {{> yield "nav1"}}
+  {{> yield "nav2"}}
+  {{> yield "main"}}
 </template>

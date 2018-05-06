@@ -1,7 +1,9 @@
-// import { Template } from 'meteor/templating';
-// import { ReactiveVar } from 'meteor/reactive-var';
-
+import { Template } from 'meteor/templating';
+import { ReactiveVar } from 'meteor/reactive-var';
+// import $ from 'jquery';
+// import 'mediaelement/full';
 // import './main.html';
+import './home.html';
 
 // Template.hello.onCreated(function helloOnCreated() {
 //   // counter starts at 0
@@ -22,6 +24,22 @@
 // });
 
 Meteor.subscribe("sounds");
+
+Template.podcasts.onRendered(function() {
+  $('video, audio').mediaelementplayer({
+	  pluginPath: '/packages/johndyer_mediaelement/build/',
+	 // alwaysShowControls: true,
+	     // features: ['playpause','current','progress','duration','volume','tracks','fullscreen'],
+  //   features: ['playpause','progress','volume'],
+  //   audioVolume: 'horizontal',
+  //   audioWidth: 450,
+  //   audioHeight: 70,
+  //   iPadUseNativeControls: true,
+  //   iPhoneUseNativeControls: true,
+  //   AndroidUseNativeControls: true
+  });
+  // console.log("hiiiii");
+});
 
 
 Template.header.rendered = function() {
@@ -284,7 +302,7 @@ Template.podcasts.helpers({
 	isAdminUser: function() {
 		// return false;
 		if(Meteor.user() && Meteor.user().roles != undefined){
-			if(Meteor.user().roles[0] == "blogAdmin"){
+			if(Meteor.user().roles == "blogAdmin"){
 				console.log("It is Admin");
 				return true;
 			} //if
@@ -306,10 +324,23 @@ Template.podcasts.helpers({
 	}, //helper
 }); //helper
 
+Template.podcasts.events({
+  "click .js-show-fileinput":function(event){
+    console.log("i am here");
+    $("#exampleModal").modal("show");
+  },
+}); //podcasts event handeler
 
 Template.sound_add_form_btn.events({
 	"click .js-show-fileinput":function(event){
-    bootbox.dialog({ message: '<div class="text-center"><i class="fa fa-spin fa-spinner"></i> Loading...</div>' });
+    // bootbox.dialog({ message: '<div class="text-center"><i class="fa fa-spin fa-spinner"></i> Loading...</div>' });
+    bootbox.prompt({
+      title: "This is a prompt with an email input!",
+      inputType: 'file',
+      callback: function (result) {
+        console.log(result);
+      }
+    });
   },
 }); // helper
 
